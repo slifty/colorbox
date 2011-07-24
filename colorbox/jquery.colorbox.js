@@ -54,7 +54,8 @@
         left: false,
         right: false,
         fixed: false,
-        data: false
+        data: false,
+		alignToWindow: false
 	},
 	
 	// Abstracting the HTML and event identifiers for easy rebranding
@@ -449,12 +450,12 @@
         }
         
         if (settings.bottom !== false) {
-            top += Math.max(document.documentElement.clientHeight - settings.h - loadedHeight - interfaceHeight - setSize(settings.bottom, 'y'), 0);
+            top += Math.max(settings.alignToWindow?$window.height():document.documentElement.clientHeight - settings.h - loadedHeight - interfaceHeight - setSize(settings.bottom, 'y'), 0);
         } else if (settings.top !== false) {
             top += setSize(settings.top, 'y');
         } else {
-            top += Math.round(Math.max(document.documentElement.clientHeight - settings.h - loadedHeight - interfaceHeight, 0) / 2);
-        }
+     	    top += Math.round(Math.max(settings.alignToWindow?$window.height():document.documentElement.clientHeight - settings.h - loadedHeight - interfaceHeight, 0) / 2);
+		}
         
         $box.show();
         
